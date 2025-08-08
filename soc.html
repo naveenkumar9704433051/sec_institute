@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="profile-dropdown">
+        <button class="profile-btn" id="profileBtn">
+            <span class="profile-circle"><img id="profilePic" src="" alt="Profile" class="profile-pic"></span>
+        </button>
+        <div class="dropdown-content" id="profileDropdown">
+            <a href="#">Profile</a>
+            <a href="#" id="logout-btn-dropdown">Logout</a>
+        </div>
+    </div>
+    <script>
+        // Set profile image with user initials (optional, can be customized)
+        function getInitials(name) {
+            if (!name) return 'U';
+            const parts = name.trim().split(/\s+/);
+            if (parts.length === 1) return parts[0][0].toUpperCase();
+            return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+        }
+        let userName = sessionStorage.getItem('currentUserName') || 'User';
+        let avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(userName))}&background=22223b&color=fff&rounded=true&size=40`;
+        window.addEventListener('DOMContentLoaded', function() {
+            var pic = document.getElementById('profilePic');
+            if (pic) pic.src = avatarUrl;
+            var logoutBtn = document.getElementById('logout-btn-dropdown');
+            if (logoutBtn) logoutBtn.onclick = function() {
+                sessionStorage.removeItem('currentUserName');
+                window.location.href = 'index.html';
+            };
+            var profileBtn = document.getElementById('profileBtn');
+            var profileDropdown = document.getElementById('profileDropdown');
+            if (profileBtn && profileDropdown) {
+                profileBtn.onclick = function(e) {
+                    e.stopPropagation();
+                    profileDropdown.classList.toggle('show');
+                };
+                window.onclick = function(e) {
+                    if (!profileDropdown.contains(e.target) && e.target !== profileBtn) {
+                        profileDropdown.classList.remove('show');
+                    }
+                };
+            }
+        });
+    </script>
+    <div class="home-header-tile soc-lab-header">
+        <h1 class="home-title soc-lab-title">SOC Training Lab</h1>
+        <div class="soc-lab-subtitle">Master the art of monitoring, detecting, and responding to cyber threats in real time.</div>
+    </div>
+    <div class="home-tile soc-lab-tile">
+        <h2 class="soc-lab-section-title">SOC Training Modules</h2>
+        <div class="courses-tile-grid">
+            <button class="course-tile-card course-tile-btn" onclick="window.location.href='soc-intro.html'" aria-label="Introduction to SOC">
+                <div class="soc-logo-title-row">
+                    <span class="soc-logo-circle"><span class="soc-logo-lock">🔒</span></span>
+                    <span class="lab-title">Introduction to SOC</span>
+                </div>
+                <div class="lab-desc">Understand the mission, structure, and daily operations of a modern SOC.</div>
+            </button>
+            <div class="course-tile-card">
+                <div class="soc-logo-title-row">
+                    <span class="soc-logo-circle"><span class="soc-logo-lock">📊</span></span>
+                    <span class="lab-title">SIEM & Log Management</span>
+                </div>
+                <div class="lab-desc">Learn how to use Security Information and Event Management (SIEM) tools to collect, analyze, and correlate security data.</div>
+            </div>
+            <div class="course-tile-card">
+                <div class="soc-logo-title-row">
+                    <span class="soc-logo-circle"><span class="soc-logo-lock">🧠</span></span>
+                    <span class="lab-title">Threat Intelligence</span>
+                </div>
+                <div class="lab-desc">Discover how to leverage threat feeds and intelligence platforms to stay ahead of attackers.</div>
+            </div>
+            <div class="course-tile-card">
+                <div class="soc-logo-title-row">
+                    <span class="soc-logo-circle"><span class="soc-logo-lock">🚨</span></span>
+                    <span class="lab-title">Incident Detection & Response</span>
+                </div>
+                <div class="lab-desc">Master the process of identifying, triaging, and responding to security incidents.</div>
+            </div>
+            <div class="course-tile-card">
+                <div class="soc-logo-title-row">
+                    <span class="soc-logo-circle"><span class="soc-logo-lock">🧪</span></span>
+                    <span class="lab-title">Hands-on Lab: Simulated Attack</span>
+                </div>
+                <div class="lab-desc">Analyze logs, detect threats, and respond to a simulated cyber attack scenario.</div>
+            </div>
+            <div class="course-tile-card">
+                <div class="soc-logo-title-row">
+                    <span class="soc-logo-circle"><span class="soc-logo-lock">📝</span></span>
+                    <span class="lab-title">Reporting & Communication</span>
+                </div>
+                <div class="lab-desc">Learn how to document incidents and communicate findings to stakeholders.</div>
+            </div>
+        </div>
+    <div class="soc-lab-btn-row">
+            <button class="course-btn" onclick="window.location.href='home.html'">Back to Home</button>
+        </div>
+    </div>
+</body>
+</html>

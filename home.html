@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="profile-dropdown">
+        <button class="profile-btn" id="profileBtn">
+            <span class="profile-circle"><img id="profilePic" src="" alt="Profile" class="profile-pic"></span>
+        </button>
+        <div class="dropdown-content" id="profileDropdown">
+            <a href="#" id="profile-info-link">Profile</a>
+            <a href="#" id="logout-btn-dropdown">Logout</a>
+        </div>
+    </div>
+    <script>
+        // Set profile image with user initials (optional, can be customized)
+        function getInitials(name) {
+            if (!name) return 'U';
+            const parts = name.trim().split(/\s+/);
+            if (parts.length === 1) return parts[0][0].toUpperCase();
+            return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+        }
+        let userName = sessionStorage.getItem('currentUserName') || 'User';
+        let avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(userName))}&background=22223b&color=fff&rounded=true&size=40`;
+        window.addEventListener('DOMContentLoaded', function() {
+            var pic = document.getElementById('profilePic');
+            if (pic) pic.src = avatarUrl;
+            var logoutBtn = document.getElementById('logout-btn-dropdown');
+            if (logoutBtn) logoutBtn.onclick = function() {
+                sessionStorage.removeItem('currentUserName');
+                window.location.href = 'index.html';
+            };
+            var profileBtn = document.getElementById('profileBtn');
+            var profileDropdown = document.getElementById('profileDropdown');
+            if (profileBtn && profileDropdown) {
+                profileBtn.onclick = function(e) {
+                    e.stopPropagation();
+                    profileDropdown.classList.toggle('show');
+                };
+                window.onclick = function(e) {
+                    if (!profileDropdown.contains(e.target) && e.target !== profileBtn) {
+                        profileDropdown.classList.remove('show');
+                    }
+                };
+            }
+
+            // Profile info popup
+            var profileInfoLink = document.getElementById('profile-info-link');
+            if (profileInfoLink) {
+                profileInfoLink.onclick = function(e) {
+                    e.preventDefault();
+                    // Simulate fetching user data from users.json (in real app, use fetch or backend)
+                    var users = [
+                        {"username": "naveen", "email": "nsureapalli@gmail.com", "mobile": "8520826271", "score": 0}
+                    ];
+                    var currentUser = sessionStorage.getItem('currentUserName') || '';
+                    var user = users.find(u => u.username === currentUser);
+                    if (user) {
+                        alert(
+                            'Username: ' + user.username + '\n' +
+                            'Email: ' + user.email + '\n' +
+                            'Mobile: ' + user.mobile + '\n' +
+                            'Score: ' + user.score
+                        );
+                    } else {
+                        alert('User info not found.');
+                    }
+                };
+            }
+        });
+    </script>
+
+    <!-- Header Tile -->
+    <header class="home-header-tile">
+        <h1 class="home-title">Welcome to CyberGuard Academy</h1>
+        <p class="cyber-subtitle">Level up your skills with hands-on cybersecurity training!</p>
+        <div class="cyber-hero-animation">
+            <div class="cyber-shield"></div>
+            <div class="cyber-lock"></div>
+        </div>
+    </header>
+
+    <!-- Courses/Labs Tile -->
+    <section class="home-tile home-courses-tile">
+        <h2>Explore Training Courses and Labs</h2>
+        <div class="courses-tile-grid">
+            <div class="course-tile-card course-tile-btn" onclick="window.location.href='soc.html'" tabindex="0" role="button" aria-label="Go to SOC Course">
+                <div class="soc-logo-title-row">
+                    <span class="soc-logo-circle"><span class="soc-logo-lock">&#128274;</span></span>
+                    <span class="lab-title soc-title-large">SOC Training Lab</span>
+                </div>
+                <div class="lab-desc soc-tile-desc">Master the art of monitoring, detecting, and responding to cyber threats in real time.</div>
+            </div>
+            <div class="course-tile-card course-tile-btn" onclick="window.location.href='vapt.html'" tabindex="0" role="button" aria-label="Go to VAPT Course">
+                <div class="soc-logo-title-row">
+                    <span class="soc-logo-circle"><span class="soc-logo-lock">&#128269;</span></span>
+                    <span class="lab-title soc-title-large">VAPT</span>
+                </div>
+                <div class="lab-desc soc-tile-desc">Vulnerability Assessment & Penetration Testing: Find and exploit weaknesses safely.</div>
+            </div>
+            <div class="course-tile-card course-tile-btn" onclick="window.location.href='ethical-hacking.html'" tabindex="0" role="button" aria-label="Go to Ethical Hacking Course">
+                <div class="soc-logo-title-row">
+                    <span class="soc-logo-circle"><span class="soc-logo-lock">&#128126;</span></span>
+                    <span class="lab-title soc-title-large">Ethical Hacking</span>
+                </div>
+                <div class="lab-desc soc-tile-desc">Ethical Hacking: Learn to think like a hacker and defend systems proactively.</div>
+            </div>
+            <div class="course-tile-card course-tile-btn" onclick="window.location.href='grc.html'" tabindex="0" role="button" aria-label="Go to GRC Course">
+                <div class="soc-logo-title-row">
+                    <span class="soc-logo-circle"><span class="soc-logo-lock">&#128200;</span></span>
+                    <span class="lab-title soc-title-large">GRC</span>
+                </div>
+                <div class="lab-desc soc-tile-desc">Governance, Risk, and Compliance: Master policies, audits, and risk management.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructors Tile -->
+    <section class="home-tile home-instructors-tile">
+        <h2>Meet Your Instructors</h2>
+        <div class="courses-tile-grid">
+            <div class="course-tile-card instructor-tile-card">
+                <div class="soc-logo-title-row">
+                    <span class="soc-logo-circle"><img src="https://ui-avatars.com/api/?name=Agent+Zero&background=22223b&color=fff&rounded=true&size=56" alt="Agent Zero"></span>
+                    <span class="lab-title soc-title-large">Agent Zero</span>
+                </div>
+                <div class="lab-desc soc-tile-desc">SOC Specialist</div>
+            </div>
+            <div class="course-tile-card instructor-tile-card">
+                <div class="soc-logo-title-row">
+                    <span class="soc-logo-circle"><img src="https://ui-avatars.com/api/?name=Red+Fox&background=ff4c4c&color=fff&rounded=true&size=56" alt="Red Fox"></span>
+                    <span class="lab-title soc-title-large">Red Fox</span>
+                </div>
+                <div class="lab-desc soc-tile-desc">VAPT Expert</div>
+            </div>
+            <div class="course-tile-card instructor-tile-card">
+                <div class="soc-logo-title-row">
+                    <span class="soc-logo-circle"><img src="https://ui-avatars.com/api/?name=Dr.+Compliance&background=4caf50&color=fff&rounded=true&size=56" alt="Dr. Compliance"></span>
+                    <span class="lab-title soc-title-large">Dr. Compliance</span>
+                </div>
+                <div class="lab-desc soc-tile-desc">GRC Guru</div>
+            </div>
+        </div>
+    </section>
+    <script>
+    </script>
+</body>
+</html>

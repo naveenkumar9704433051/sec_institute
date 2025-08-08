@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="message-area" class="message-area" hidden></div>
+    <div class="container">
+        <div class="form-container" id="login-container">
+            <h2>Login</h2>
+            <form id="login-form">
+                <input type="text" id="login-identifier" placeholder="Username, Email, or Mobile Number" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <div id="otp-section-login" class="hidden">
+                    <input type="text" id="login-otp" placeholder="Enter OTP" maxlength="6">
+                </div>
+                <button type="button" id="send-otp-login">Send OTP</button>
+                <button type="submit" id="login-btn" class="hidden">Login</button>
+                <p>Don't have an account? <a href="#" id="show-register">Register</a></p>
+            </form>
+        </div>
+        <div class="form-container hidden" id="register-container">
+            <h2>Register</h2>
+            <form id="register-form">
+                <input type="text" id="register-username" placeholder="Username" required>
+                <input type="email" id="register-email" placeholder="Email" required autocomplete="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$">
+                <input type="text" id="register-mobile" placeholder="Mobile Number" required pattern="[0-9]{10}">
+                <input type="password" id="register-password" placeholder="Password" required>
+                <input type="password" id="register-confirm" placeholder="Confirm Password" required>
+                <div id="otp-section-register" class="hidden">
+                    <input type="text" id="register-otp" placeholder="Enter OTP" maxlength="6">
+                </div>
+                <button type="button" id="send-otp-register">Send OTP</button>
+                <button type="submit" id="register-btn" class="hidden">Register</button>
+                <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

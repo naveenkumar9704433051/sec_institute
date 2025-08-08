@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to SOC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="soc-intro-center">
+    <div class="profile-dropdown">
+        <button class="profile-btn" id="profileBtn">
+            <span class="profile-circle"><img id="profilePic" src="" alt="Profile" class="profile-pic"></span>
+        </button>
+        <div class="dropdown-content" id="profileDropdown">
+            <a href="#">Profile</a>
+            <a href="#" id="logout-btn-dropdown">Logout</a>
+        </div>
+    </div>
+<script>
+    // Set profile image with user initials (optional, can be customized)
+    function getInitials(name) {
+        if (!name) return 'U';
+        const parts = name.trim().split(/\s+/);
+        if (parts.length === 1) return parts[0][0].toUpperCase();
+        return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+    let userName = sessionStorage.getItem('currentUserName') || 'User';
+    let avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(userName))}&background=22223b&color=fff&rounded=true&size=40`;
+    window.addEventListener('DOMContentLoaded', function() {
+        var pic = document.getElementById('profilePic');
+        if (pic) pic.src = avatarUrl;
+        var logoutBtn = document.getElementById('logout-btn-dropdown');
+        if (logoutBtn) logoutBtn.onclick = function() {
+            sessionStorage.removeItem('currentUserName');
+            window.location.href = 'index.html';
+        };
+        var profileBtn = document.getElementById('profileBtn');
+        var profileDropdown = document.getElementById('profileDropdown');
+        if (profileBtn && profileDropdown) {
+            profileBtn.onclick = function(e) {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('show');
+            };
+            window.onclick = function(e) {
+                if (!profileDropdown.contains(e.target) && e.target !== profileBtn) {
+                    profileDropdown.classList.remove('show');
+                }
+            };
+        }
+    });
+</script>
+    <header class="soc-intro-header">
+        <h1 class="soc-intro-title"><span class="soc-icon-big"></span> Introduction to SOC</h1>
+        <p class="soc-subtitle">Understanding the Security Operations Center</p>
+    </header>
+    <div class="soc-intro-content">
+        <div class="soc-topic-tile">
+            <h2>What is a Security Operations Center (SOC)?</h2>
+            <p>A Security Operations Center (SOC) is a centralized unit that deals with security issues on an organizational and technical level. The main goal of a SOC is to monitor, detect, investigate, and respond to cyber threats around the clock, protecting the organization's information assets.</p>
+        </div>
+
+        <div class="soc-topic-tile">
+            <h3>Key Functions of a SOC</h3>
+            <!-- SOC Team Image Placeholder -->
+            <img src="" alt="SOC Team" class="soc-img">
+            <ul>
+                <li><strong>Continuous Monitoring:</strong> 24/7 surveillance of networks, servers, and endpoints for suspicious activity.</li>
+                <li><strong>Incident Detection:</strong> Identifying potential security incidents using SIEM tools and threat intelligence.</li>
+                <li><strong>Incident Response:</strong> Taking action to contain and remediate threats.</li>
+                <li><strong>Threat Analysis:</strong> Investigating alerts and understanding attack patterns.</li>
+                <li><strong>Reporting:</strong> Documenting incidents and communicating with stakeholders.</li>
+            </ul>
+        </div>
+
+        <div class="soc-topic-tile">
+            <h3>SOC Roles & Responsibilities</h3>
+            <ul>
+                <li><strong>Tier 1 Analyst (Alert Analyst):</strong> Monitors dashboards, triages alerts, and escalates incidents.</li>
+                <li><strong>Tier 2 Analyst (Incident Responder):</strong> Investigates incidents, performs deeper analysis, and coordinates response.</li>
+                <li><strong>Tier 3 Analyst (Threat Hunter):</strong> Proactively searches for hidden threats and advanced attacks.</li>
+                <li><strong>SOC Manager:</strong> Oversees SOC operations, reporting, and team management.</li>
+            </ul>
+        </div>
+
+        <div class="soc-topic-tile">
+            <h3>SOC Architecture Diagram</h3>
+            <!-- SOC Architecture Diagram Placeholder -->
+            <img src="" alt="SOC Architecture Diagram" class="soc-img">
+        </div>
+
+
+        <div class="soc-topic-tile">
+            <h3>Incident Response Timeline</h3>
+            <div class="soc-timeline">
+                <div class="timeline-step"><span>1</span> Detect</div>
+                <div class="timeline-arrow">→</div>
+                <div class="timeline-step"><span>2</span> Analyze</div>
+                <div class="timeline-arrow">→</div>
+                <div class="timeline-step"><span>3</span> Contain</div>
+                <div class="timeline-arrow">→</div>
+                <div class="timeline-step"><span>4</span> Eradicate</div>
+                <div class="timeline-arrow">→</div>
+                <div class="timeline-step"><span>5</span> Recover</div>
+                <div class="timeline-arrow">→</div>
+                <div class="timeline-step"><span>6</span> Report</div>
+            </div>
+        </div>
+
+        <div class="soc-topic-tile">
+            <h3>Key SOC Terms (Glossary)</h3>
+            <ul class="soc-glossary">
+                <li><strong>SIEM:</strong> Security Information and Event Management platform for log analysis and alerting.</li>
+                <li><strong>IOC:</strong> Indicator of Compromise, evidence of a potential breach.</li>
+                <li><strong>Playbook:</strong> Step-by-step guide for responding to specific incidents.</li>
+                <li><strong>Escalation:</strong> Passing an incident to a higher-level analyst or team.</li>
+                <li><strong>False Positive:</strong> An alert that turns out not to be a real threat.</li>
+            </ul>
+        </div>
+
+        <div class="soc-topic-tile">
+            <h3>Interactive: Day in the Life of a SOC Analyst</h3>
+            <div class="soc-scenario">
+                <button onclick="alert('You start your shift by checking SIEM alerts.')">Start Shift</button>
+                <button onclick="alert('You investigate a suspicious login and escalate to Tier 2.')">Investigate Alert</button>
+                <button onclick="alert('You join an incident response call and help contain a malware outbreak.')">Respond to Incident</button>
+                <button onclick="alert('You write a report and hand over to the next shift.')">End Shift</button>
+            </div>
+        </div>
+
+        <div class="soc-topic-tile">
+            <h3>Downloadable Resources</h3>
+            <ul>
+                <li><a href="#" download>Download SOC Analyst Checklist (PDF)</a> <!-- Replace # with your file path --></li>
+            </ul>
+        </div>
+
+        <div class="soc-topic-tile">
+            <h3>SOC Career Pathways</h3>
+            <div class="soc-timeline soc-career-timeline">
+                <div class="timeline-step"><span>1</span> Tier 1 Analyst</div>
+                <div class="timeline-arrow">→</div>
+                <div class="timeline-step"><span>2</span> Tier 2 Analyst</div>
+                <div class="timeline-arrow">→</div>
+                <div class="timeline-step"><span>3</span> Tier 3 Analyst</div>
+                <div class="timeline-arrow">→</div>
+                <div class="timeline-step"><span>4</span> SOC Manager</div>
+            </div>
+        </div>
+
+        <div class="soc-topic-tile">
+            <h3>Certifications</h3>
+            <ul>
+                <li>CompTIA CySA+</li>
+                <li>EC-Council CSA</li>
+                <li>GIAC GCIA</li>
+                <li>Blue Team Level 1</li>
+                <li>Other relevant certifications</li>
+            </ul>
+        </div>
+
+        <div class="soc-topic-tile">
+            <h3>Top 5 Tips for SOC Analysts</h3>
+            <ol>
+                <li>Always verify alerts before escalating.</li>
+                <li>Document every step of your investigation.</li>
+                <li>Keep learning about new threats and tools.</li>
+                <li>Communicate clearly with your team.</li>
+                <li>Practice using your playbooks regularly.</li>
+            </ol>
+        </div>
+
+        <div class="soc-topic-tile">
+            <h3>Free Online SOC Labs & Simulators</h3>
+            <ul>
+                <li><a href="https://tryhackme.com/room/introtooffensivesecurity" target="_blank" rel="noopener">TryHackMe: Intro to Offensive Security</a></li>
+                <li><a href="https://www.cyberdefenders.org/labs/" target="_blank" rel="noopener">CyberDefenders Labs</a></li>
+                <li><a href="https://blue-team-labs-online.com/" target="_blank" rel="noopener">Blue Team Labs Online</a></li>
+            </ul>
+            <ul>
+                <li><strong>Phishing Attack Detection:</strong> SOC analysts spot suspicious emails and block malicious links before users click them.</li>
+                <li><strong>Ransomware Containment:</strong> When ransomware is detected, the SOC isolates affected systems and initiates recovery procedures.</li>
+                <li><strong>Insider Threat Monitoring:</strong> SOC uses behavioral analytics to detect unusual access patterns by employees.</li>
+            </ul>
+        </div>
+
+        <div class="soc-topic-tile">
+            <h3>SOC Knowledge Quiz</h3>
+            <form id="soc-quiz">
+                <div class="soc-mcq">
+                    <div class="soc-mcq-q">1. What is the main purpose of a SOC?</div>
+                    <label><input type="checkbox" name="q1" value="a"> Monitor and respond to security threats</label><br>
+                    <label><input type="checkbox" name="q1" value="b"> Develop new software</label><br>
+                    <label><input type="checkbox" name="q1" value="c"> Manage company finances</label><br>
+                </div>
+                <div class="soc-mcq">
+                    <div class="soc-mcq-q">2. Which of the following are common SOC tools? (Select all that apply)</div>
+                    <label><input type="checkbox" name="q2" value="a"> SIEM platforms</label><br>
+                    <label><input type="checkbox" name="q2" value="b"> Firewalls</label><br>
+                    <label><input type="checkbox" name="q2" value="c"> Coffee machines</label><br>
+                    <label><input type="checkbox" name="q2" value="d"> IDS/IPS</label><br>
+                </div>
+                <div class="soc-mcq">
+                    <div class="soc-mcq-q">3. Who typically investigates and escalates incidents in a SOC?</div>
+                    <label><input type="checkbox" name="q3" value="a"> Tier 1 Analyst</label><br>
+                    <label><input type="checkbox" name="q3" value="b"> Marketing Manager</label><br>
+                    <label><input type="checkbox" name="q3" value="c"> Tier 2 Analyst</label><br>
+                </div>
+                <div class="soc-mcq">
+                    <div class="soc-mcq-q">4. Can a SOC be outsourced?</div>
+                    <label><input type="checkbox" name="q4" value="a"> Yes</label><br>
+                    <label><input type="checkbox" name="q4" value="b"> No</label><br>
+                </div>
+                <button type="submit">Submit Quiz</button>
+            </form>
+            <div id="quiz-result"></div>
+            <h3>Example Scenario</h3>
+            <div class="soc-example">
+                <strong>Scenario:</strong> The SOC receives an alert about unusual login attempts from a foreign country. Analysts investigate the logs, confirm a brute-force attack, and block the suspicious IP addresses. They then report the incident and recommend password resets for affected users.
+            </div>
+        </div>
+        <div class="soc-topic-tile">
+            <h3>How Does a SOC Work?</h3>
+            <!-- SOC Operations Image Placeholder -->
+            <img src="" alt="SOC Operations" class="soc-img">
+            <ol>
+                <li>Data from firewalls, servers, and endpoints is collected and sent to the SOC.</li>
+                <li>SIEM tools analyze the data for anomalies.</li>
+                <li>Analysts investigate alerts and determine if they are real threats.</li>
+                <li>Response actions are taken to contain and resolve incidents.</li>
+            </ol>
+        </div>
+
+        <div class="soc-topic-tile">
+            <h3>Short Video: What is a SOC?</h3>
+            <!-- SOC Video Placeholder -->
+            <div class="soc-video">
+                <video width="560" height="315" controls>
+                    <source src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+
+        <div class="soc-topic-tile">
+            <h3>Summary</h3>
+            <p>A SOC is the nerve center of an organization's cybersecurity efforts. It brings together people, processes, and technology to defend against cyber threats and keep information safe.</p>
+            <button onclick="window.location.href='soc.html'">Back to SOC</button>
+        </div>
+    </div>
+</body>
+</html>
